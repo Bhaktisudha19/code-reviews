@@ -25,14 +25,14 @@ public class HotelQuoteService {
             return quoteCache.get(request);
         }
 
-        long nights = ChronoUnit.DAYS.between(request.checkIn(), request.checkOut());
-        int rooms = request.rooms() == 0 ? 1 : request.rooms();
-        int guests = request.guests() == 0 ? rooms : request.guests();
+        long nights = ChronoUnit.DAYS.between(request.getCheckIn(), request.getCheckOut());
+        int rooms = request.getRooms() == 0 ? 1 : request.getRooms();
+        int guests = request.getGuests() == 0 ? rooms : request.getGuests();
         BigDecimal subtotal = BigDecimal.ZERO;
 
         for (int offset = 0; offset < nights; offset++) {
-            LocalDate stayDate = request.checkIn().plusDays(offset);
-            BigDecimal dayRate = request.nightlyRate();
+            LocalDate stayDate = request.getCheckIn().plusDays(offset);
+            BigDecimal dayRate = request.getNightlyRate();
 
             if (isWeekend(stayDate)) {
                 dayRate = dayRate.multiply(WEEKEND_MULTIPLIER);
@@ -45,7 +45,7 @@ public class HotelQuoteService {
             subtotal = subtotal.add(EXTRA_GUEST_FEE.multiply(BigDecimal.valueOf(guests - rooms * 2)));
         }
 
-        BigDecimal discountRate = LOYALTY_DISCOUNTS.getOrDefault(request.loyaltyTier(), BigDecimal.ZERO);
+        BigDecimal discountRate = LOYALTY_DISCOUNTS.getOrDefault(request.getLoyaltyTier(), BigDecimal.ZERO);
         BigDecimal discount = subtotal.multiply(discountRate);
         BigDecimal taxableAmount = subtotal.subtract(discount);
         BigDecimal tax = taxableAmount.multiply(TAX_RATE);
@@ -55,7 +55,7 @@ public class HotelQuoteService {
                 nights,
                 rooms,
                 guests,
-                request.currency(),
+                request.getCurrency(),
                 money(subtotal),
                 money(discount),
                 money(tax),
