@@ -8,6 +8,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Calculates pre-booking price estimates for checkout and shopping flows.
+ *
+ * The service owns quote calculation only. It does not reserve inventory, capture payment,
+ * or guarantee supplier settlement amounts. Callers should receive a fast, deterministic,
+ * auditable breakdown or fail before showing an unreliable price to the customer.
+ */
 public class HotelQuoteService {
     private static final BigDecimal TAX_RATE = new BigDecimal("0.12");
     private static final BigDecimal WEEKEND_MULTIPLIER = new BigDecimal("1.18");
