@@ -1,0 +1,13 @@
+{
+  "name": "code-reviews",
+  "version": "1.0.0",
+  "description": "Practice repository for code review exercises.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
