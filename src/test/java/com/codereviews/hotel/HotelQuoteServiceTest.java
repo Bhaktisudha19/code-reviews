@@ -28,14 +28,14 @@ class HotelQuoteServiceTest {
                 null
         ));
 
-        assertEquals(1, quote.nights());
-        assertEquals(1, quote.rooms());
-        assertEquals(2, quote.guests());
-        assertEquals("USD", quote.currency());
-        assertEquals(new BigDecimal("100.00"), quote.subtotal());
-        assertEquals(new BigDecimal("0.00"), quote.discount());
-        assertEquals(new BigDecimal("12.00"), quote.tax());
-        assertEquals(new BigDecimal("112.00"), quote.total());
+        assertEquals(1, quote.getNights());
+        assertEquals(1, quote.getRooms());
+        assertEquals(2, quote.getGuests());
+        assertEquals("USD", quote.getCurrency());
+        assertEquals(new BigDecimal("100.00"), quote.getSubtotal());
+        assertEquals(new BigDecimal("0.00"), quote.getDiscount());
+        assertEquals(new BigDecimal("12.00"), quote.getTax());
+        assertEquals(new BigDecimal("112.00"), quote.getTotal());
     }
 
     @Test
@@ -50,11 +50,11 @@ class HotelQuoteServiceTest {
                 "gold"
         ));
 
-        assertEquals(2, quote.nights());
-        assertEquals(new BigDecimal("236.00"), quote.subtotal());
-        assertEquals(new BigDecimal("16.52"), quote.discount());
-        assertEquals(new BigDecimal("26.34"), quote.tax());
-        assertEquals(new BigDecimal("245.82"), quote.total());
+        assertEquals(2, quote.getNights());
+        assertEquals(new BigDecimal("236.00"), quote.getSubtotal());
+        assertEquals(new BigDecimal("16.52"), quote.getDiscount());
+        assertEquals(new BigDecimal("26.34"), quote.getTax());
+        assertEquals(new BigDecimal("245.82"), quote.getTotal());
     }
 
     @Test
@@ -69,8 +69,8 @@ class HotelQuoteServiceTest {
                 "none"
         ));
 
-        assertEquals(new BigDecimal("145.00"), quote.subtotal());
-        assertEquals(new BigDecimal("162.40"), quote.total());
+        assertEquals(new BigDecimal("145.00"), quote.getSubtotal());
+        assertEquals(new BigDecimal("162.40"), quote.getTotal());
     }
 
     @Test
